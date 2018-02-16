@@ -43,12 +43,22 @@ int main() {
   edges_drawing = new_matrix(4, 2);
 
   // draw!!!
-  c.green = MAX_COLOR;
-  add_edge(edges_drawing, 0, 0, 0, 500, 500, 0);
-  c.green = MAX_COLOR;
-  add_edge(edges_drawing, 0, 500, 0, 500, 0, 0);
+  c.red = MAX_COLOR / 2;
+  c.green = MAX_COLOR / 2;
+  c.blue = MAX_COLOR / 2;
+
+  add_edge(edges_drawing, 0, 0, 0, 250, 250, 0);
+  add_edge(edges_drawing, 250, 250, 0, 500, 0, 0);
+  add_edge(edges_drawing, 0, 250, 0, 500, 250, 0);
+
+  add_edge(edges_drawing, 250, 0, 0, 250, 50, 0);
+  add_edge(edges_drawing, 250, 70, 0, 250, 115, 0);
+  add_edge(edges_drawing, 250, 130, 0, 250, 170, 0);
+  add_edge(edges_drawing, 250, 180, 0, 250, 215, 0);
+  add_edge(edges_drawing, 250, 220, 0, 250, 250, 0);
 
   draw_lines(edges_drawing, s, c);
+
   display(s);
 
   free_matrix( edges );
