@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 #include "matrix.h"
 
@@ -12,6 +13,20 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
+    int i, j;
+    char buffer[m->rows * m->cols * 5];
+    strcpy(buffer, "");
+
+    for (i = 0; i < m->rows; i++) {
+        for (j = 0; j < m->cols; j++) {
+            char tmp[10];
+            sprintf(tmp, "%.2f ", m->m[i][j]);
+            strcat(buffer, tmp);
+        }
+        strcat(buffer, "\n");
+    }
+
+    printf("%s\n", buffer);
 }
 
 /*-------------- void ident() --------------
@@ -21,6 +36,15 @@ Returns:
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+    int i, j;
+
+    for (i = 0; i < m->rows; i++) {
+        for (j = 0; j < m->cols; j++) {
+            if (i == j) {
+                m->m[i][j] = 1;
+            }
+        }
+    }
 }
 
 
@@ -32,6 +56,19 @@ Returns:
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+    int i, j, k;
+
+    struct matrix *c = new_matrix(b->rows, b->cols);
+    
+    for (i = 0; i < a->rows; i++) {
+        for (j = 0; j < b->cols; j++) {
+            for (k = 0; k < a->rows; k++) {
+                c->m[i][j] += a->m[i][k] * b->m[k][j];
+            }
+        }
+    }
+
+    *b = *c;
 }
 
 
